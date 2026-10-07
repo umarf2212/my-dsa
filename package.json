@@ -1,0 +1,53 @@
+{
+  "name": "dsa-field-guide",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
+    "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
+    "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log wrangler dev --config dist/server/wrangler.json --local",
+    "test": "node --experimental-strip-types --test tests/highlighting.test.mjs",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "db:generate": "drizzle-kit generate",
+    "typecheck": "tsc --noEmit",
+    "check": "npm test && npm run typecheck && npm run build && npm run test:render",
+    "package": "node scripts/package-release.mjs",
+    "test:render": "node --test tests/rendered-html.test.mjs"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.45.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "highlight.js": "11.12.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.63.0",
+    "@eslint/js": "9.39.4",
+    "@next/eslint-plugin-next": "16.4.0",
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.34",
+    "drizzle-kit": "0.31.11",
+    "eslint": "9.39.4",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "16.4.0",
+    "react-server-dom-webpack": "19.2.8",
+    "tailwindcss": "4.2.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.59.3",
+    "vinext": "1.0.1",
+    "vite": "8.3.3",
+    "wrangler": "4.148.0",
+    "@cloudflare/workers-types": "5.20261007.1"
+  },
+  "type": "module",
+  "description": "A searchable DSA study workspace with original Python snippets and local progress tracking."
+}

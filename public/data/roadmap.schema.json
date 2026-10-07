@@ -1,0 +1,607 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dsa-roadmap-ui.schema.json",
+  "title": "DSA Roadmap UI Data",
+  "description": "Normalized roadmap content designed for a UI or agent-generated study application.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "type",
+    "title",
+    "description",
+    "source",
+    "stats",
+    "milestones",
+    "topicNodes",
+    "sections",
+    "nodes",
+    "progress"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "const": "roadmap"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "stats": {
+      "$ref": "#/$defs/stats"
+    },
+    "milestones": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/milestone"
+      }
+    },
+    "topicNodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/topicNode"
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/problemNode"
+      }
+    },
+    "progress": {
+      "$ref": "#/$defs/progress"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "title",
+        "creator",
+        "description",
+        "capturedAt",
+        "statusOnSource",
+        "type",
+        "verification",
+        "captureMethod"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "capturedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "statusOnSource": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "community_roadmap"
+        },
+        "verification": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "not_verified",
+            "unknown"
+          ]
+        },
+        "captureMethod": {
+          "type": "string"
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sectionCount",
+        "topicNodeCount",
+        "problemNodeCount",
+        "contentBlockCount",
+        "codeBlockCount"
+      ],
+      "properties": {
+        "sectionCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "topicNodeCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "problemNodeCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contentBlockCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "codeBlockCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "milestone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "phases",
+        "outcome"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phases": {
+          "type": "string"
+        },
+        "outcome": {
+          "type": "string"
+        }
+      }
+    },
+    "topicNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "order",
+        "title",
+        "label",
+        "sectionId",
+        "problemNodeIds",
+        "problemCount"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "const": "topic"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "sectionId": {
+          "type": "string"
+        },
+        "problemNodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "problemCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "order",
+        "title",
+        "sourceLabel",
+        "focus",
+        "exitCheck",
+        "problemNodeIds",
+        "problemCount"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "const": "section"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string"
+        },
+        "sourceLabel": {
+          "type": "string"
+        },
+        "focus": {
+          "type": "string"
+        },
+        "exitCheck": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "problemNodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "problemCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "problemNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "slug",
+        "order",
+        "graphOrder",
+        "sectionId",
+        "sectionOrder",
+        "label",
+        "title",
+        "content",
+        "study",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "const": "problem"
+        },
+        "slug": {
+          "type": "string",
+          "minLength": 1
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "graphOrder": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sectionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sectionOrder": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/contentBlock"
+          }
+        },
+        "study": {
+          "$ref": "#/$defs/studyState"
+        },
+        "source": {
+          "$ref": "#/$defs/nodeSource"
+        }
+      }
+    },
+    "contentBlock": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/paragraphBlock"
+        },
+        {
+          "$ref": "#/$defs/listBlock"
+        },
+        {
+          "$ref": "#/$defs/codeBlock"
+        }
+      ]
+    },
+    "paragraphBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "text",
+        "sourceHtml"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "const": "paragraph"
+        },
+        "text": {
+          "type": "string"
+        },
+        "sourceHtml": {
+          "type": "string"
+        }
+      }
+    },
+    "listItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "sourceHtml"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "sourceHtml": {
+          "type": "string"
+        }
+      }
+    },
+    "listBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "ordered",
+        "items",
+        "sourceHtml"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "const": "list"
+        },
+        "ordered": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/listItem"
+          }
+        },
+        "sourceHtml": {
+          "type": "string"
+        }
+      }
+    },
+    "codeBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "language",
+        "code"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "const": "code"
+        },
+        "language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "checklistItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "completed"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "studyState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "completed",
+        "attempts",
+        "notes",
+        "lastReviewedAt",
+        "reviewDates",
+        "checklist"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_started",
+            "in_progress",
+            "completed",
+            "needs_review"
+          ]
+        },
+        "completed": {
+          "type": "boolean"
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string"
+        },
+        "lastReviewedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "reviewDates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "checklist": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/checklistItem"
+          }
+        }
+      }
+    },
+    "nodeSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "capturedAt",
+        "nodeId",
+        "nodeKind",
+        "label"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "capturedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "nodeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nodeKind": {
+          "type": "string",
+          "const": "subtopic"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completedNodeCount",
+        "totalNodeCount",
+        "percent"
+      ],
+      "properties": {
+        "completedNodeCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalNodeCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  }
+}
