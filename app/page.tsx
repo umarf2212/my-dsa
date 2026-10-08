@@ -244,7 +244,7 @@ export default function Home() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/data/roadmap.json")
+    fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/data/roadmap.json`)
       .then((response) => {
         if (!response.ok) throw new Error("Could not load the roadmap data.");
         return response.json() as Promise<RoadmapData>;

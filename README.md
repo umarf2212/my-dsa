@@ -1,5 +1,7 @@
 # DSA Field Guide
 
+**[Open the live Field Guide](https://umarf2212.github.io/my-dsa/)**
+
 A searchable study workspace for Umar Farooque’s DSA roadmap: **62 problems**, **9 sections**, and **68 original snippets**.
 
 Browse problems, filter by study status, track attempts, complete checklists, and save notes. Python snippets have syntax highlighting with a theme matched to the original interface. Progress is saved in your browser’s local storage.
@@ -28,6 +30,16 @@ npm run package   # create a source archive in artifacts/
 `public/data/roadmap.json` is the original captured content. No snippet has been corrected, reformatted, trimmed, or rewritten. Highlighting adds escaped token spans only when rendering Python code. The seven text examples retain plain-text rendering. Unknown languages also fall back to the original text.
 
 `tests/fixtures/original-snippets.json` records each original snippet’s ID, language, and SHA-256 checksum. Tests verify all 68 snippets against that baseline and check that stripping highlighting markup recovers every original character, including whitespace.
+
+## GitHub Pages
+
+The public app is hosted at **https://umarf2212.github.io/my-dsa/**. The `Publish GitHub Pages` workflow checks snippet integrity, type-checks, builds a static export, verifies the exported assets and original roadmap, and deploys after each push to `main`. It can also be run manually from GitHub Actions.
+
+```sh
+npm run build:pages
+```
+
+The deployable files are written to `dist/pages/`. The Pages build handles the `/my-dsa/` URL prefix for scripts, styles, fonts, images, and roadmap data. It requires no server or account; study progress stays in each visitor’s browser. The original Worker build remains available through `npm run build`.
 
 ## Project layout
 

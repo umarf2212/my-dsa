@@ -12,25 +12,27 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dsa-field-guide.wtblogger25.chatgpt.site"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://dsa-field-guide.wtblogger25.chatgpt.site"),
   title: "DSA Field Guide",
   description: "A calm, searchable study workspace for your DSA roadmap.",
   openGraph: {
     title: "DSA Field Guide",
     description: "Build the instinct behind the answer.",
     type: "website",
-    images: [{ url: "/og.png", width: 1536, height: 1024, alt: "DSA Field Guide" }],
+    images: [{ url: `${basePath}/og.png`, width: 1536, height: 1024, alt: "DSA Field Guide" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "DSA Field Guide",
     description: "Build the instinct behind the answer.",
-    images: ["/og.png"],
+    images: [`${basePath}/og.png`],
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: `${basePath}/favicon.svg`,
+    shortcut: `${basePath}/favicon.svg`,
   },
 };
 
